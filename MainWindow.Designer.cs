@@ -33,7 +33,6 @@ namespace yh9uoip
             this.label1 = new System.Windows.Forms.Label();
             this.fileLocText = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.removeDataGarbage = new System.Windows.Forms.CheckBox();
             this.LoadWholeFilePart = new System.Windows.Forms.RadioButton();
             this.partNumb = new System.Windows.Forms.TextBox();
             this.LoadOnlySpecificPart = new System.Windows.Forms.RadioButton();
@@ -43,6 +42,7 @@ namespace yh9uoip
             this.selectFile = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.openOLMFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.fixJapaneseChars = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +70,7 @@ namespace yh9uoip
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.removeDataGarbage);
+            this.groupBox1.Controls.Add(this.fixJapaneseChars);
             this.groupBox1.Controls.Add(this.LoadWholeFilePart);
             this.groupBox1.Controls.Add(this.partNumb);
             this.groupBox1.Controls.Add(this.LoadOnlySpecificPart);
@@ -86,18 +86,6 @@ namespace yh9uoip
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PTR2 Subtitle Decoder and Editor";
-            // 
-            // removeDataGarbage
-            // 
-            this.removeDataGarbage.AutoSize = true;
-            this.removeDataGarbage.Checked = true;
-            this.removeDataGarbage.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.removeDataGarbage.Location = new System.Drawing.Point(9, 83);
-            this.removeDataGarbage.Name = "removeDataGarbage";
-            this.removeDataGarbage.Size = new System.Drawing.Size(276, 17);
-            this.removeDataGarbage.TabIndex = 9;
-            this.removeDataGarbage.Text = "Don\'t load japanese garbage (USA and JP roms only)";
-            this.removeDataGarbage.UseVisualStyleBackColor = true;
             // 
             // LoadWholeFilePart
             // 
@@ -150,7 +138,6 @@ namespace yh9uoip
             this.unloadSubIdCheckbox.TabIndex = 5;
             this.unloadSubIdCheckbox.Text = "Don\'t load subtitle ids (beta)";
             this.unloadSubIdCheckbox.UseVisualStyleBackColor = true;
-            this.unloadSubIdCheckbox.CheckedChanged += new System.EventHandler(this.unloadSubIdCheckbox_CheckedChanged);
             // 
             // butEdit
             // 
@@ -184,6 +171,17 @@ namespace yh9uoip
             // openOLMFileDialog
             // 
             this.openOLMFileDialog.Filter = "OLM File|*.olm|All files|*.*";
+            // 
+            // fixJapaneseChars
+            // 
+            this.fixJapaneseChars.AutoSize = true;
+            this.fixJapaneseChars.Location = new System.Drawing.Point(9, 83);
+            this.fixJapaneseChars.Name = "fixJapaneseChars";
+            this.fixJapaneseChars.Size = new System.Drawing.Size(155, 17);
+            this.fixJapaneseChars.TabIndex = 9;
+            this.fixJapaneseChars.Text = "Use EUC-JP (USA/JP only)";
+            this.fixJapaneseChars.UseVisualStyleBackColor = true;
+            this.fixJapaneseChars.CheckedChanged += new System.EventHandler(this.changeEncoding);
             // 
             // MainWindow
             // 
@@ -222,7 +220,7 @@ namespace yh9uoip
         private System.Windows.Forms.RadioButton LoadSubsPartOnly;
         private System.Windows.Forms.CheckBox unloadSubIdCheckbox;
         private System.Windows.Forms.RadioButton LoadWholeFilePart;
-        private System.Windows.Forms.CheckBox removeDataGarbage;
+        private System.Windows.Forms.CheckBox fixJapaneseChars;
     }
 }
 

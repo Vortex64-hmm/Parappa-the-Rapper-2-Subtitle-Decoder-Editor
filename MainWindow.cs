@@ -1,13 +1,8 @@
 ﻿using System;
 using System.IO;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace yh9uoip
@@ -15,16 +10,20 @@ namespace yh9uoip
     public partial class MainWindow : Form
     {
         // Info about our program
-        public static string versionName = "Testing build, 28/02/2021";
+        public static string versionName = "Testing public build, 2/03/2021";
+
+        // For changing Encoding to all parts
+        public static Encoding currentEncoding = Encoding.Default;
 
         // Things that will be used in the Editor be here
         public static string openOLMTempString;
         public static string openOLMFileLoc;
         public static string openOLMFileName;
+        public static bool fixJapanBool;
 
         // Characters removed in the process
         public static string[] checkVolatileData = { "\x1", "\x2", "\x3", "\x4", "\x5", "\x6", "\x7", "\x8", "\x9", "\xA", "\xB", "\xC", "\xD", "\xE", "\xF" };
-        public static string[] japaneseGarbageCommonStrings = { "¦", "©", "¤", "¥" };
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -62,9 +61,10 @@ namespace yh9uoip
             tmpstring = "";
             outputDecodedArray.Clear();
 
-            try { subfile = File.ReadAllText(fileLoc, System.Text.Encoding.Default); } catch(Exception e) // if the user inserts wrong files
+            try { subfile = File.ReadAllText(fileLoc, currentEncoding); } catch(Exception e) // if the user inserts wrong files
             {
-                MessageBox.Show("There was an error at opening the OLM file.");
+                MessageBox.Show("There was an error at opening the OLM file");
+                Console.WriteLine("Error : " + e);
                 return;
             }
 
@@ -78,11 +78,7 @@ namespace yh9uoip
             string[] tmpSubArray = tmpstring.Split('\x0');
             foreach(string tmpTestString in tmpSubArray)
             {
-                bool unwanted;
-                bool japaneseGarbage = japaneseGarbageCommonStrings.Any(tmpTestString.Contains);
-
-                if (removeDataGarbage.Checked) { unwanted = !checkVolatileData.Any(tmpTestString.Contains) && !japaneseGarbage; } else { unwanted = !checkVolatileData.Any(tmpTestString.Contains); }
-                if (unwanted)
+                if (!checkVolatileData.Any(tmpTestString.Contains))
                 {
                     outputDecodedArray.Add(tmpTestString);
                 }
@@ -101,18 +97,8 @@ namespace yh9uoip
                 if (!cond1) openOLMTempString += $"{item}" + System.Environment.NewLine;
             }
 
+            fixJapanBool = fixJapaneseChars.Checked;
             openOLMFileLoc = fileLoc;
-        }
-
-        // For historical reasons, lets save a copy of the original code :D
-        private void runOriginalSubDecoder()
-        {
-            string directory = fileLocText.Text;
-            string text = File.ReadAllText(directory);
-            File.WriteAllText("temp.olm", text);
-            string decode = File.ReadAllText("temp.olm");
-            string output = decode.Substring(158161);
-            File.WriteAllText("output.olm", output);
         }
 
         // Interface functions
@@ -125,7 +111,6 @@ namespace yh9uoip
                 e.Handled = true;
             }
 
-            // only allow one decimal point
             if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
             {
                 e.Handled = true;
@@ -143,12 +128,17 @@ namespace yh9uoip
             }
         }
 
-        private void unloadSubIdCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
+        // Fix Functions
 
+        private void changeEncoding(object sender, EventArgs e)
+        {
+            if(fixJapaneseChars.Checked)
+            {
+                currentEncoding = Encoding.GetEncoding(20932);
+            } else
+            {
+                currentEncoding = Encoding.Default;
+            }
         }
     }
 }
-  
-       
-    

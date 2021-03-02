@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace yh9uoip
@@ -16,7 +10,9 @@ namespace yh9uoip
     {
         public int OriginOLMLinesSize;
         public string OriginOLMFileLoc;
-        public string OriginalOLMLoaded; // POV: Let's not become Google Chrome, lets store again instead of decrypting 2 times.
+        public string OriginalOLMLoaded;
+        public string OriginCurrentEnc;
+        public bool IsJapanFix;
 
         public Editor()
         {
@@ -25,31 +21,26 @@ namespace yh9uoip
             // Get all the info we need
             editBox.Clear();
             editBox.Text = MainWindow.openOLMTempString;
+            IsJapanFix = MainWindow.fixJapanBool;
             OriginOLMLinesSize = editBox.Lines.Length;
             OriginOLMFileLoc = MainWindow.openOLMFileLoc;
             OriginalOLMLoaded = MainWindow.openOLMTempString;
             this.Text = MainWindow.openOLMFileName + " - PTR2SDE Editor";
         }
 
-        private void saveOLMFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveAs(object sender, EventArgs e)
         {
             if (saveOLM.ShowDialog() == DialogResult.OK)
             {
-                byte[] bytestring = Encoding.UTF8.GetBytes(bakeFinalFile());
-                byte[] convtmp = Encoding.Convert(Encoding.UTF8, Encoding.Default, bytestring);
-                string conv = Encoding.Default.GetString(convtmp);
-                File.WriteAllText(saveOLM.FileName, conv, Encoding.Default);
-                MessageBox.Show("OLM Saved successfully.");
+                File.WriteAllText(saveOLM.FileName, conv(), MainWindow.currentEncoding);
+                MessageBox.Show("OLM Saved successfully");
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void save(object sender, EventArgs e)
         {
-            byte[] bytestring = Encoding.UTF8.GetBytes(bakeFinalFile());
-            byte[] convtmp = Encoding.Convert(Encoding.UTF8, Encoding.Default, bytestring);
-            string conv = Encoding.Default.GetString(convtmp);
-            File.WriteAllText(OriginOLMFileLoc, conv, Encoding.Default);
-            MessageBox.Show("OLM Saved successfully.");
+            File.WriteAllText(OriginOLMFileLoc, conv(), MainWindow.currentEncoding);
+            MessageBox.Show("OLM Saved successfully");
         }
 
         private void saveRawLinesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,25 +66,41 @@ namespace yh9uoip
             {
                 if (saveRawLines.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(saveRawLines.FileName, editBox.Text, System.Text.Encoding.Default);
+                    File.WriteAllText(saveRawLines.FileName, editBox.Text, MainWindow.currentEncoding);
                 }
             } else
             {
                 if (loadRawLines.ShowDialog() == DialogResult.OK)
                 {
-                    editBox.Text = File.ReadAllText(loadRawLines.FileName, System.Text.Encoding.Default);
+                    editBox.Text = File.ReadAllText(loadRawLines.FileName, MainWindow.currentEncoding);
                 }
+            }
+        }
+
+        private string conv()
+        {
+            if (IsJapanFix)
+            {
+                return bakeFinalFile();
+            }
+            else
+            {
+                byte[] bytestring = Encoding.UTF8.GetBytes(bakeFinalFile());
+                byte[] convtmp = Encoding.Convert(Encoding.UTF8, MainWindow.currentEncoding, bytestring);
+                return Encoding.Default.GetString(convtmp);
             }
         }
 
         private string bakeFinalFile()
         {
             checkNewOLMIntegrity();
+            
+            string file = editBox.Text;
 
             string[] Original = OriginalOLMLoaded.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            string[] Modded = editBox.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            string[] Modded = file.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            string FinalFile = File.ReadAllText(OriginOLMFileLoc, Encoding.Default);
+            string FinalFile = File.ReadAllText(OriginOLMFileLoc, MainWindow.currentEncoding);
 
             foreach (string item in Modded)
             {
@@ -105,7 +112,7 @@ namespace yh9uoip
 
         private void checkNewOLMIntegrity()
         {
-            if(OriginOLMLinesSize != editBox.Lines.Length)
+            if (OriginOLMLinesSize != editBox.Lines.Length)
             {
                 MessageBox.Show("Sorry, at this moment isn't possible to add more or remove subtitles", "Oopsie");
             }
