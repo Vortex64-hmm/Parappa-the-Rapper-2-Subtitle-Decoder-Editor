@@ -3,4 +3,4 @@
 1. Open OLM
 2. Edit as the way you like
 3. Save ;)
-4. Insert into PTR2 and see the result
+4. Insert into PTR2 and see the changes once the rom is rebuilt!
