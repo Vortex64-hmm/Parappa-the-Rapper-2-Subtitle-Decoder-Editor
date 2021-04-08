@@ -1,8 +1,8 @@
-# Parappa the Rapper 2 Subtitle Decoder/Editor [WIP]
-## How to use
-1. Open OLM
-2. Edit as the way you like
-3. Save ;)
-4. Insert into PTR2 and see the changes once the rom is rebuilt!
-## A Warning to everyone using this version
-The program is being rewritten and if everything goes right will be fixed any bugs related to glitching strings after a edited subtitle with different size than original :)
+# Parappa the Rapper 2 Subtitle Decoder/Editor
+A simple tool for reading and modifying PaRappa the Rapper 2 stage subtitles. It's still needing some polish but it works.
+## Usage
++ To modify, you will first need to extract the stage's OLM from your copy of the game, after doing so open the program, select the file clicking on the "..." button and click on "Decrypt & Edit.
++ Double click any subtitle to edit, at the bottom modify as you want and click Edit to apply the changes to the list.
++ After editing, save the file and insert in your copy.
+
+

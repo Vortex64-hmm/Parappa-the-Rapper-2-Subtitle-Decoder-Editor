@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("yh9uoip")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("PTR2SDE")]
+[assembly: AssemblyDescription("PaRappa the Rapper 2 Subtitle Decryptor and Editor")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("yh9uoip")]

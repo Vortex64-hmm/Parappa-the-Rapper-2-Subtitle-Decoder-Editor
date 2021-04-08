@@ -30,177 +30,165 @@ namespace yh9uoip
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.label1 = new System.Windows.Forms.Label();
-            this.fileLocText = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.LoadWholeFilePart = new System.Windows.Forms.RadioButton();
-            this.partNumb = new System.Windows.Forms.TextBox();
-            this.LoadOnlySpecificPart = new System.Windows.Forms.RadioButton();
-            this.LoadSubsPartOnly = new System.Windows.Forms.RadioButton();
-            this.unloadSubIdCheckbox = new System.Windows.Forms.CheckBox();
-            this.butEdit = new System.Windows.Forms.Button();
-            this.selectFile = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.openOLMFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.fixJapaneseChars = new System.Windows.Forms.CheckBox();
-            this.groupBox1.SuspendLayout();
+            this.logoPic = new System.Windows.Forms.PictureBox();
+            this.logoText = new System.Windows.Forms.Label();
+            this.logoTextVer = new System.Windows.Forms.Label();
+            this.editBut = new System.Windows.Forms.Button();
+            this.fileTextBox = new System.Windows.Forms.TextBox();
+            this.selFileBut = new System.Windows.Forms.Button();
+            this.helpGroup = new System.Windows.Forms.GroupBox();
+            this.vortexDiscord = new System.Windows.Forms.Label();
+            this.dhtsinhoDiscord = new System.Windows.Forms.Label();
+            this.ptr2modServerLink = new System.Windows.Forms.LinkLabel();
+            this.helpText = new System.Windows.Forms.Label();
+            this.openOlmDialog = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPic)).BeginInit();
+            this.helpGroup.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // logoPic
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(324, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "PTR2 Subtitle Decoder and Editor";
+            this.logoPic.BackgroundImage = global::yh9uoip.Properties.Resources.MainLogo;
+            this.logoPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.logoPic.Dock = System.Windows.Forms.DockStyle.Left;
+            this.logoPic.Location = new System.Drawing.Point(0, 0);
+            this.logoPic.Name = "logoPic";
+            this.logoPic.Size = new System.Drawing.Size(263, 259);
+            this.logoPic.TabIndex = 0;
+            this.logoPic.TabStop = false;
             // 
-            // fileLocText
+            // logoText
             // 
-            this.fileLocText.BackColor = System.Drawing.SystemColors.Window;
-            this.fileLocText.Location = new System.Drawing.Point(9, 33);
-            this.fileLocText.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.fileLocText.Name = "fileLocText";
-            this.fileLocText.ReadOnly = true;
-            this.fileLocText.Size = new System.Drawing.Size(253, 20);
-            this.fileLocText.TabIndex = 2;
+            this.logoText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.logoText.AutoSize = true;
+            this.logoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logoText.Location = new System.Drawing.Point(332, 9);
+            this.logoText.Name = "logoText";
+            this.logoText.Size = new System.Drawing.Size(306, 16);
+            this.logoText.TabIndex = 1;
+            this.logoText.Text = "PaRappa The Rapper 2 Sub Decrypter and Editor";
+            this.logoText.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // groupBox1
+            // logoTextVer
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.fixJapaneseChars);
-            this.groupBox1.Controls.Add(this.LoadWholeFilePart);
-            this.groupBox1.Controls.Add(this.partNumb);
-            this.groupBox1.Controls.Add(this.LoadOnlySpecificPart);
-            this.groupBox1.Controls.Add(this.LoadSubsPartOnly);
-            this.groupBox1.Controls.Add(this.unloadSubIdCheckbox);
-            this.groupBox1.Controls.Add(this.butEdit);
-            this.groupBox1.Controls.Add(this.selectFile);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.fileLocText);
-            this.groupBox1.Location = new System.Drawing.Point(340, 9);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(300, 209);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "PTR2 Subtitle Decoder and Editor";
+            this.logoTextVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.logoTextVer.ForeColor = System.Drawing.Color.Gray;
+            this.logoTextVer.Location = new System.Drawing.Point(335, 25);
+            this.logoTextVer.Name = "logoTextVer";
+            this.logoTextVer.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.logoTextVer.Size = new System.Drawing.Size(303, 19);
+            this.logoTextVer.TabIndex = 2;
+            this.logoTextVer.Text = "V2";
+            this.logoTextVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // LoadWholeFilePart
+            // editBut
             // 
-            this.LoadWholeFilePart.AutoSize = true;
-            this.LoadWholeFilePart.Location = new System.Drawing.Point(9, 154);
-            this.LoadWholeFilePart.Name = "LoadWholeFilePart";
-            this.LoadWholeFilePart.Size = new System.Drawing.Size(96, 17);
-            this.LoadWholeFilePart.TabIndex = 5;
-            this.LoadWholeFilePart.Text = "Load whole file";
-            this.LoadWholeFilePart.UseVisualStyleBackColor = true;
+            this.editBut.Location = new System.Drawing.Point(285, 224);
+            this.editBut.Name = "editBut";
+            this.editBut.Size = new System.Drawing.Size(340, 23);
+            this.editBut.TabIndex = 3;
+            this.editBut.Text = "Decrypt and edit";
+            this.editBut.UseVisualStyleBackColor = true;
+            this.editBut.Click += new System.EventHandler(this.editBut_Click);
             // 
-            // partNumb
+            // fileTextBox
             // 
-            this.partNumb.Enabled = false;
-            this.partNumb.Location = new System.Drawing.Point(146, 131);
-            this.partNumb.Name = "partNumb";
-            this.partNumb.Size = new System.Drawing.Size(36, 20);
-            this.partNumb.TabIndex = 8;
-            this.partNumb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SpecificPartTextboss_KeyPress);
+            this.fileTextBox.Location = new System.Drawing.Point(285, 198);
+            this.fileTextBox.Name = "fileTextBox";
+            this.fileTextBox.ReadOnly = true;
+            this.fileTextBox.Size = new System.Drawing.Size(309, 20);
+            this.fileTextBox.TabIndex = 4;
             // 
-            // LoadOnlySpecificPart
+            // selFileBut
             // 
-            this.LoadOnlySpecificPart.AutoSize = true;
-            this.LoadOnlySpecificPart.Location = new System.Drawing.Point(9, 131);
-            this.LoadOnlySpecificPart.Name = "LoadOnlySpecificPart";
-            this.LoadOnlySpecificPart.Size = new System.Drawing.Size(131, 17);
-            this.LoadOnlySpecificPart.TabIndex = 7;
-            this.LoadOnlySpecificPart.Text = "Load specific part only";
-            this.LoadOnlySpecificPart.UseVisualStyleBackColor = true;
-            this.LoadOnlySpecificPart.CheckedChanged += new System.EventHandler(this.loadOnlySpecificPart_CheckedChanged);
+            this.selFileBut.Location = new System.Drawing.Point(600, 198);
+            this.selFileBut.Name = "selFileBut";
+            this.selFileBut.Size = new System.Drawing.Size(25, 20);
+            this.selFileBut.TabIndex = 5;
+            this.selFileBut.Text = "...";
+            this.selFileBut.UseVisualStyleBackColor = true;
+            this.selFileBut.Click += new System.EventHandler(this.selFileBut_Click);
             // 
-            // LoadSubsPartOnly
+            // helpGroup
             // 
-            this.LoadSubsPartOnly.AutoSize = true;
-            this.LoadSubsPartOnly.Checked = true;
-            this.LoadSubsPartOnly.Location = new System.Drawing.Point(9, 108);
-            this.LoadSubsPartOnly.Name = "LoadSubsPartOnly";
-            this.LoadSubsPartOnly.Size = new System.Drawing.Size(151, 17);
-            this.LoadSubsPartOnly.TabIndex = 6;
-            this.LoadSubsPartOnly.TabStop = true;
-            this.LoadSubsPartOnly.Text = "Load only the subtitles part";
-            this.LoadSubsPartOnly.UseVisualStyleBackColor = true;
+            this.helpGroup.Controls.Add(this.vortexDiscord);
+            this.helpGroup.Controls.Add(this.dhtsinhoDiscord);
+            this.helpGroup.Controls.Add(this.ptr2modServerLink);
+            this.helpGroup.Controls.Add(this.helpText);
+            this.helpGroup.Location = new System.Drawing.Point(285, 59);
+            this.helpGroup.Name = "helpGroup";
+            this.helpGroup.Size = new System.Drawing.Size(340, 133);
+            this.helpGroup.TabIndex = 6;
+            this.helpGroup.TabStop = false;
+            this.helpGroup.Text = "Help";
             // 
-            // unloadSubIdCheckbox
+            // vortexDiscord
             // 
-            this.unloadSubIdCheckbox.AutoSize = true;
-            this.unloadSubIdCheckbox.Location = new System.Drawing.Point(9, 60);
-            this.unloadSubIdCheckbox.Name = "unloadSubIdCheckbox";
-            this.unloadSubIdCheckbox.Size = new System.Drawing.Size(156, 17);
-            this.unloadSubIdCheckbox.TabIndex = 5;
-            this.unloadSubIdCheckbox.Text = "Don\'t load subtitle ids (beta)";
-            this.unloadSubIdCheckbox.UseVisualStyleBackColor = true;
+            this.vortexDiscord.AutoSize = true;
+            this.vortexDiscord.Location = new System.Drawing.Point(6, 98);
+            this.vortexDiscord.Name = "vortexDiscord";
+            this.vortexDiscord.Size = new System.Drawing.Size(80, 13);
+            this.vortexDiscord.TabIndex = 8;
+            this.vortexDiscord.Text = "Vortex64#2891";
             // 
-            // butEdit
+            // dhtsinhoDiscord
             // 
-            this.butEdit.Location = new System.Drawing.Point(190, 180);
-            this.butEdit.Name = "butEdit";
-            this.butEdit.Size = new System.Drawing.Size(104, 23);
-            this.butEdit.TabIndex = 5;
-            this.butEdit.Text = "Decode and edit";
-            this.butEdit.UseVisualStyleBackColor = true;
-            this.butEdit.Click += new System.EventHandler(this.butEdit_Click);
+            this.dhtsinhoDiscord.AutoSize = true;
+            this.dhtsinhoDiscord.Location = new System.Drawing.Point(6, 81);
+            this.dhtsinhoDiscord.Name = "dhtsinhoDiscord";
+            this.dhtsinhoDiscord.Size = new System.Drawing.Size(98, 13);
+            this.dhtsinhoDiscord.TabIndex = 7;
+            this.dhtsinhoDiscord.Text = "DHTSinho C#5891";
             // 
-            // selectFile
+            // ptr2modServerLink
             // 
-            this.selectFile.Location = new System.Drawing.Point(268, 33);
-            this.selectFile.Name = "selectFile";
-            this.selectFile.Size = new System.Drawing.Size(26, 20);
-            this.selectFile.TabIndex = 4;
-            this.selectFile.Text = "...";
-            this.selectFile.UseVisualStyleBackColor = true;
-            this.selectFile.Click += new System.EventHandler(this.selectFile_Click);
+            this.ptr2modServerLink.AutoSize = true;
+            this.ptr2modServerLink.Location = new System.Drawing.Point(6, 63);
+            this.ptr2modServerLink.Name = "ptr2modServerLink";
+            this.ptr2modServerLink.Size = new System.Drawing.Size(152, 13);
+            this.ptr2modServerLink.TabIndex = 7;
+            this.ptr2modServerLink.TabStop = true;
+            this.ptr2modServerLink.Text = "PTR2 Modding Community link";
+            this.ptr2modServerLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ptr2modServerLink_LinkClicked);
             // 
-            // label2
+            // helpText
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Select a .OLM file";
+            this.helpText.AutoSize = true;
+            this.helpText.Location = new System.Drawing.Point(6, 16);
+            this.helpText.Name = "helpText";
+            this.helpText.Size = new System.Drawing.Size(320, 39);
+            this.helpText.TabIndex = 7;
+            this.helpText.Text = "If you need any help you can go to the modding server, we have a\r\nlot of great to" +
+    "ols in there and a lot of people interessted in helping\r\nyou or reach the develo" +
+    "pers of this tool directly.";
             // 
-            // openOLMFileDialog
+            // openOlmDialog
             // 
-            this.openOLMFileDialog.Filter = "OLM File|*.olm|All files|*.*";
-            // 
-            // fixJapaneseChars
-            // 
-            this.fixJapaneseChars.AutoSize = true;
-            this.fixJapaneseChars.Location = new System.Drawing.Point(9, 83);
-            this.fixJapaneseChars.Name = "fixJapaneseChars";
-            this.fixJapaneseChars.Size = new System.Drawing.Size(155, 17);
-            this.fixJapaneseChars.TabIndex = 9;
-            this.fixJapaneseChars.Text = "Use EUC-JP (USA/JP only)";
-            this.fixJapaneseChars.UseVisualStyleBackColor = true;
-            this.fixJapaneseChars.CheckedChanged += new System.EventHandler(this.changeEncoding);
+            this.openOlmDialog.Filter = "OLM File|*.olm|All Files|*.*";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(652, 230);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
-            this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ClientSize = new System.Drawing.Size(650, 259);
+            this.Controls.Add(this.helpGroup);
+            this.Controls.Add(this.selFileBut);
+            this.Controls.Add(this.fileTextBox);
+            this.Controls.Add(this.editBut);
+            this.Controls.Add(this.logoTextVer);
+            this.Controls.Add(this.logoText);
+            this.Controls.Add(this.logoPic);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(352, 269);
+            this.MaximumSize = new System.Drawing.Size(666, 298);
+            this.MinimumSize = new System.Drawing.Size(666, 298);
             this.Name = "MainWindow";
             this.Text = "PTR2SDE";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPic)).EndInit();
+            this.helpGroup.ResumeLayout(false);
+            this.helpGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,19 +196,17 @@ namespace yh9uoip
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox fileLocText;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button selectFile;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button butEdit;
-        private System.Windows.Forms.OpenFileDialog openOLMFileDialog;
-        private System.Windows.Forms.TextBox partNumb;
-        private System.Windows.Forms.RadioButton LoadOnlySpecificPart;
-        private System.Windows.Forms.RadioButton LoadSubsPartOnly;
-        private System.Windows.Forms.CheckBox unloadSubIdCheckbox;
-        private System.Windows.Forms.RadioButton LoadWholeFilePart;
-        private System.Windows.Forms.CheckBox fixJapaneseChars;
+        private System.Windows.Forms.PictureBox logoPic;
+        private System.Windows.Forms.Label logoText;
+        private System.Windows.Forms.Label logoTextVer;
+        private System.Windows.Forms.Button editBut;
+        private System.Windows.Forms.TextBox fileTextBox;
+        private System.Windows.Forms.Button selFileBut;
+        private System.Windows.Forms.GroupBox helpGroup;
+        private System.Windows.Forms.Label vortexDiscord;
+        private System.Windows.Forms.Label dhtsinhoDiscord;
+        private System.Windows.Forms.LinkLabel ptr2modServerLink;
+        private System.Windows.Forms.Label helpText;
+        private System.Windows.Forms.OpenFileDialog openOlmDialog;
     }
 }
-

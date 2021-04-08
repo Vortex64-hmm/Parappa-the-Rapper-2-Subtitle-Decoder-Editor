@@ -30,233 +30,426 @@ namespace yh9uoip
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolBar = new System.Windows.Forms.ToolStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.saveAction = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsAction = new System.Windows.Forms.ToolStripMenuItem();
+            this.save = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveRawLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadRawLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSub = new System.Windows.Forms.ToolStripMenuItem();
+            this.importSub = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.noToolsYetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomIn = new System.Windows.Forms.ToolStripMenuItem();
-            this.zoomOut = new System.Windows.Forms.ToolStripMenuItem();
-            this.wordWrap = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutMenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.editBox = new System.Windows.Forms.TextBox();
-            this.loadRawLines = new System.Windows.Forms.OpenFileDialog();
-            this.saveRawLines = new System.Windows.Forms.SaveFileDialog();
+            this.exitBut = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.noToolsSign = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpMenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.aboutBut = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabEdit = new System.Windows.Forms.TabControl();
+            this.cutscenePage = new System.Windows.Forms.TabPage();
+            this.cutscenePanel = new System.Windows.Forms.Panel();
+            this.cutsceneView = new System.Windows.Forms.ListView();
+            this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timeStart = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.timeEnd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.text = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cutsceneEditText = new System.Windows.Forms.TextBox();
+            this.ctimingEndText = new System.Windows.Forms.TextBox();
+            this.ctimingStartText = new System.Windows.Forms.TextBox();
+            this.editBut = new System.Windows.Forms.Button();
+            this.gameplayPage = new System.Windows.Forms.TabPage();
+            this.gameplayPanel = new System.Windows.Forms.Panel();
+            this.gameplayView = new System.Windows.Forms.ListView();
+            this.gid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gtext = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gameplayEditTab = new System.Windows.Forms.Panel();
+            this.gameplayEditText = new System.Windows.Forms.TextBox();
+            this.geditButton = new System.Windows.Forms.Button();
+            this.debugPage = new System.Windows.Forms.TabPage();
+            this.debuggingText = new System.Windows.Forms.TextBox();
             this.saveOLM = new System.Windows.Forms.SaveFileDialog();
-            this.toolStrip.SuspendLayout();
+            this.toolBar.SuspendLayout();
+            this.tabEdit.SuspendLayout();
+            this.cutscenePage.SuspendLayout();
+            this.cutscenePanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.gameplayPage.SuspendLayout();
+            this.gameplayPanel.SuspendLayout();
+            this.gameplayEditTab.SuspendLayout();
+            this.debugPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStrip
+            // toolBar
             // 
-            this.toolStrip.BackColor = System.Drawing.Color.White;
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBar.BackColor = System.Drawing.Color.White;
+            this.toolBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
-            this.toolsMenu,
-            this.viewMenu,
-            this.aboutMenu});
-            this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(800, 22);
-            this.toolStrip.TabIndex = 0;
-            this.toolStrip.Text = "toolb";
+            this.toolStripDropDownButton2,
+            this.helpMenu});
+            this.toolBar.Location = new System.Drawing.Point(0, 0);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Padding = new System.Windows.Forms.Padding(0);
+            this.toolBar.ShowItemToolTips = false;
+            this.toolBar.Size = new System.Drawing.Size(800, 25);
+            this.toolBar.TabIndex = 0;
             // 
             // fileMenu
             // 
             this.fileMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveAction,
-            this.saveAsAction,
+            this.save,
+            this.saveAs,
             this.toolStripSeparator1,
-            this.saveRawLinesToolStripMenuItem,
-            this.loadRawLinesToolStripMenuItem,
+            this.exportSub,
+            this.importSub,
             this.toolStripSeparator2,
-            this.exit});
+            this.exitBut});
+            this.fileMenu.Image = ((System.Drawing.Image)(resources.GetObject("fileMenu.Image")));
             this.fileMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.ShowDropDownArrow = false;
-            this.fileMenu.Size = new System.Drawing.Size(29, 19);
+            this.fileMenu.Size = new System.Drawing.Size(29, 22);
             this.fileMenu.Text = "File";
             // 
-            // saveAction
+            // save
             // 
-            this.saveAction.Name = "saveAction";
-            this.saveAction.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveAction.Size = new System.Drawing.Size(208, 22);
-            this.saveAction.Text = "Save";
-            this.saveAction.Click += new System.EventHandler(this.save);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(157, 22);
+            this.save.Text = "Save";
+            this.save.Click += new System.EventHandler(this.save_Click);
             // 
-            // saveAsAction
+            // saveAs
             // 
-            this.saveAsAction.Name = "saveAsAction";
-            this.saveAsAction.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.saveAsAction.Size = new System.Drawing.Size(208, 22);
-            this.saveAsAction.Text = "Save as...";
-            this.saveAsAction.Click += new System.EventHandler(this.saveAs);
+            this.saveAs.Name = "saveAs";
+            this.saveAs.Size = new System.Drawing.Size(157, 22);
+            this.saveAs.Text = "Save as...";
+            this.saveAs.Click += new System.EventHandler(this.saveAs_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(205, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
             // 
-            // saveRawLinesToolStripMenuItem
+            // exportSub
             // 
-            this.saveRawLinesToolStripMenuItem.Name = "saveRawLinesToolStripMenuItem";
-            this.saveRawLinesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.saveRawLinesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.saveRawLinesToolStripMenuItem.Text = "Save raw subtitles";
-            this.saveRawLinesToolStripMenuItem.Click += new System.EventHandler(this.saveRawLinesToolStripMenuItem_Click);
+            this.exportSub.Name = "exportSub";
+            this.exportSub.Size = new System.Drawing.Size(157, 22);
+            this.exportSub.Text = "Export subtitles";
+            this.exportSub.Click += new System.EventHandler(this.ToBeMade);
             // 
-            // loadRawLinesToolStripMenuItem
+            // importSub
             // 
-            this.loadRawLinesToolStripMenuItem.Name = "loadRawLinesToolStripMenuItem";
-            this.loadRawLinesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-            this.loadRawLinesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.loadRawLinesToolStripMenuItem.Text = "Load raw subtitles";
-            this.loadRawLinesToolStripMenuItem.Click += new System.EventHandler(this.loadRawLinesToolStripMenuItem_Click);
+            this.importSub.Name = "importSub";
+            this.importSub.Size = new System.Drawing.Size(157, 22);
+            this.importSub.Text = "Import subtitles";
+            this.importSub.Click += new System.EventHandler(this.ToBeMade);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(205, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(154, 6);
             // 
-            // exit
+            // exitBut
             // 
-            this.exit.Name = "exit";
-            this.exit.Size = new System.Drawing.Size(208, 22);
-            this.exit.Text = "Exit";
-            this.exit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitBut.Name = "exitBut";
+            this.exitBut.Size = new System.Drawing.Size(157, 22);
+            this.exitBut.Text = "Exit";
+            this.exitBut.Click += new System.EventHandler(this.exitBut_Click);
             // 
-            // toolsMenu
+            // toolStripDropDownButton2
             // 
-            this.toolsMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.noToolsYetToolStripMenuItem});
-            this.toolsMenu.Image = ((System.Drawing.Image)(resources.GetObject("toolsMenu.Image")));
-            this.toolsMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolsMenu.Name = "toolsMenu";
-            this.toolsMenu.ShowDropDownArrow = false;
-            this.toolsMenu.Size = new System.Drawing.Size(38, 19);
-            this.toolsMenu.Text = "Tools";
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.noToolsSign});
+            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.ShowDropDownArrow = false;
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(38, 22);
+            this.toolStripDropDownButton2.Text = "Tools";
             // 
-            // noToolsYetToolStripMenuItem
+            // noToolsSign
             // 
-            this.noToolsYetToolStripMenuItem.Enabled = false;
-            this.noToolsYetToolStripMenuItem.Name = "noToolsYetToolStripMenuItem";
-            this.noToolsYetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.noToolsYetToolStripMenuItem.Text = "No tools yet :(";
+            this.noToolsSign.Enabled = false;
+            this.noToolsSign.Name = "noToolsSign";
+            this.noToolsSign.Size = new System.Drawing.Size(148, 22);
+            this.noToolsSign.Text = "No tools yet :(";
             // 
-            // viewMenu
+            // helpMenu
             // 
-            this.viewMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.viewMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zoomToolStripMenuItem,
-            this.wordWrap});
-            this.viewMenu.Image = ((System.Drawing.Image)(resources.GetObject("viewMenu.Image")));
-            this.viewMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.viewMenu.Name = "viewMenu";
-            this.viewMenu.ShowDropDownArrow = false;
-            this.viewMenu.Size = new System.Drawing.Size(36, 19);
-            this.viewMenu.Text = "View";
-            this.viewMenu.ToolTipText = "View";
+            this.helpMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutBut});
+            this.helpMenu.Image = ((System.Drawing.Image)(resources.GetObject("helpMenu.Image")));
+            this.helpMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpMenu.Name = "helpMenu";
+            this.helpMenu.ShowDropDownArrow = false;
+            this.helpMenu.Size = new System.Drawing.Size(36, 22);
+            this.helpMenu.Text = "Help";
             // 
-            // zoomToolStripMenuItem
+            // aboutBut
             // 
-            this.zoomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zoomIn,
-            this.zoomOut});
-            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.zoomToolStripMenuItem.Text = "Zoom";
+            this.aboutBut.Name = "aboutBut";
+            this.aboutBut.Size = new System.Drawing.Size(156, 22);
+            this.aboutBut.Text = "About PTR2SDE";
+            this.aboutBut.Click += new System.EventHandler(this.aboutBut_Click);
             // 
-            // zoomIn
+            // tabEdit
             // 
-            this.zoomIn.Name = "zoomIn";
-            this.zoomIn.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
-            this.zoomIn.Size = new System.Drawing.Size(222, 22);
-            this.zoomIn.Text = "Zoom In";
-            this.zoomIn.Click += new System.EventHandler(this.zoomIn_Click);
+            this.tabEdit.Controls.Add(this.cutscenePage);
+            this.tabEdit.Controls.Add(this.gameplayPage);
+            this.tabEdit.Controls.Add(this.debugPage);
+            this.tabEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabEdit.Location = new System.Drawing.Point(0, 25);
+            this.tabEdit.Name = "tabEdit";
+            this.tabEdit.SelectedIndex = 0;
+            this.tabEdit.Size = new System.Drawing.Size(800, 425);
+            this.tabEdit.TabIndex = 1;
             // 
-            // zoomOut
+            // cutscenePage
             // 
-            this.zoomOut.Name = "zoomOut";
-            this.zoomOut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
-            this.zoomOut.Size = new System.Drawing.Size(222, 22);
-            this.zoomOut.Text = "Zoom Out";
-            this.zoomOut.Click += new System.EventHandler(this.zoomOut_Click);
+            this.cutscenePage.AutoScroll = true;
+            this.cutscenePage.BackColor = System.Drawing.Color.White;
+            this.cutscenePage.Controls.Add(this.cutscenePanel);
+            this.cutscenePage.Controls.Add(this.panel1);
+            this.cutscenePage.Location = new System.Drawing.Point(4, 22);
+            this.cutscenePage.Name = "cutscenePage";
+            this.cutscenePage.Padding = new System.Windows.Forms.Padding(3);
+            this.cutscenePage.Size = new System.Drawing.Size(792, 399);
+            this.cutscenePage.TabIndex = 0;
+            this.cutscenePage.Text = "Cutscene";
             // 
-            // wordWrap
+            // cutscenePanel
             // 
-            this.wordWrap.Name = "wordWrap";
-            this.wordWrap.Size = new System.Drawing.Size(134, 22);
-            this.wordWrap.Text = "Word Wrap";
-            this.wordWrap.Click += new System.EventHandler(this.worldWrapToolStripMenuItem_Click);
+            this.cutscenePanel.Controls.Add(this.cutsceneView);
+            this.cutscenePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cutscenePanel.Location = new System.Drawing.Point(3, 3);
+            this.cutscenePanel.Name = "cutscenePanel";
+            this.cutscenePanel.Size = new System.Drawing.Size(786, 363);
+            this.cutscenePanel.TabIndex = 3;
             // 
-            // aboutMenu
+            // cutsceneView
             // 
-            this.aboutMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.aboutMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutButton});
-            this.aboutMenu.Image = ((System.Drawing.Image)(resources.GetObject("aboutMenu.Image")));
-            this.aboutMenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.aboutMenu.Name = "aboutMenu";
-            this.aboutMenu.ShowDropDownArrow = false;
-            this.aboutMenu.Size = new System.Drawing.Size(36, 19);
-            this.aboutMenu.Text = "Help";
-            this.aboutMenu.ToolTipText = "About";
+            this.cutsceneView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.id,
+            this.cid,
+            this.timeStart,
+            this.timeEnd,
+            this.text});
+            this.cutsceneView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cutsceneView.FullRowSelect = true;
+            this.cutsceneView.HideSelection = false;
+            this.cutsceneView.Location = new System.Drawing.Point(0, 0);
+            this.cutsceneView.MultiSelect = false;
+            this.cutsceneView.Name = "cutsceneView";
+            this.cutsceneView.Size = new System.Drawing.Size(786, 363);
+            this.cutsceneView.TabIndex = 2;
+            this.cutsceneView.UseCompatibleStateImageBehavior = false;
+            this.cutsceneView.View = System.Windows.Forms.View.Details;
+            this.cutsceneView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cutsceneView_MouseDoubleClick);
+            this.cutsceneView.Resize += new System.EventHandler(this.cutsceneView_Resize);
             // 
-            // aboutButton
+            // id
             // 
-            this.aboutButton.Name = "aboutButton";
-            this.aboutButton.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.aboutButton.Size = new System.Drawing.Size(199, 22);
-            this.aboutButton.Text = "About PTR2SDE";
-            this.aboutButton.Click += new System.EventHandler(this.aboutPTR2SDEToolStripMenuItem_Click);
+            this.id.Text = "ID";
+            this.id.Width = 30;
             // 
-            // editBox
+            // cid
             // 
-            this.editBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editBox.Location = new System.Drawing.Point(0, 22);
-            this.editBox.Multiline = true;
-            this.editBox.Name = "editBox";
-            this.editBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.editBox.Size = new System.Drawing.Size(800, 428);
-            this.editBox.TabIndex = 1;
-            this.editBox.WordWrap = false;
+            this.cid.Text = "CID";
+            this.cid.Width = 30;
             // 
-            // loadRawLines
+            // timeStart
             // 
-            this.loadRawLines.Filter = "PTR2SDE\'s Raw Lines|*.ptrl|All files|*.*";
+            this.timeStart.Text = "Start";
             // 
-            // saveRawLines
+            // timeEnd
             // 
-            this.saveRawLines.Filter = "PTR2SDE\'s Raw Lines|*.ptrl|All files|*.*";
+            this.timeEnd.Text = "End";
+            // 
+            // text
+            // 
+            this.text.Text = "Text";
+            this.text.Width = 602;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cutsceneEditText);
+            this.panel1.Controls.Add(this.ctimingEndText);
+            this.panel1.Controls.Add(this.ctimingStartText);
+            this.panel1.Controls.Add(this.editBut);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(3, 366);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(786, 30);
+            this.panel1.TabIndex = 2;
+            // 
+            // cutsceneEditText
+            // 
+            this.cutsceneEditText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cutsceneEditText.Location = new System.Drawing.Point(167, 6);
+            this.cutsceneEditText.Name = "cutsceneEditText";
+            this.cutsceneEditText.Size = new System.Drawing.Size(533, 20);
+            this.cutsceneEditText.TabIndex = 3;
+            // 
+            // ctimingEndText
+            // 
+            this.ctimingEndText.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ctimingEndText.Location = new System.Drawing.Point(86, 6);
+            this.ctimingEndText.Name = "ctimingEndText";
+            this.ctimingEndText.Size = new System.Drawing.Size(75, 20);
+            this.ctimingEndText.TabIndex = 2;
+            // 
+            // ctimingStartText
+            // 
+            this.ctimingStartText.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.ctimingStartText.Location = new System.Drawing.Point(5, 6);
+            this.ctimingStartText.Name = "ctimingStartText";
+            this.ctimingStartText.Size = new System.Drawing.Size(75, 20);
+            this.ctimingStartText.TabIndex = 1;
+            // 
+            // editBut
+            // 
+            this.editBut.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.editBut.Location = new System.Drawing.Point(706, 6);
+            this.editBut.Name = "editBut";
+            this.editBut.Size = new System.Drawing.Size(75, 20);
+            this.editBut.TabIndex = 0;
+            this.editBut.Text = "Edit";
+            this.editBut.UseVisualStyleBackColor = true;
+            this.editBut.Click += new System.EventHandler(this.editBut_Click);
+            // 
+            // gameplayPage
+            // 
+            this.gameplayPage.AutoScroll = true;
+            this.gameplayPage.BackColor = System.Drawing.Color.White;
+            this.gameplayPage.Controls.Add(this.gameplayPanel);
+            this.gameplayPage.Controls.Add(this.gameplayEditTab);
+            this.gameplayPage.Location = new System.Drawing.Point(4, 22);
+            this.gameplayPage.Name = "gameplayPage";
+            this.gameplayPage.Padding = new System.Windows.Forms.Padding(3);
+            this.gameplayPage.Size = new System.Drawing.Size(792, 399);
+            this.gameplayPage.TabIndex = 1;
+            this.gameplayPage.Text = "Gameplay";
+            // 
+            // gameplayPanel
+            // 
+            this.gameplayPanel.Controls.Add(this.gameplayView);
+            this.gameplayPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gameplayPanel.Location = new System.Drawing.Point(3, 3);
+            this.gameplayPanel.Name = "gameplayPanel";
+            this.gameplayPanel.Size = new System.Drawing.Size(786, 363);
+            this.gameplayPanel.TabIndex = 5;
+            // 
+            // gameplayView
+            // 
+            this.gameplayView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.gid,
+            this.gtext});
+            this.gameplayView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gameplayView.FullRowSelect = true;
+            this.gameplayView.HideSelection = false;
+            this.gameplayView.Location = new System.Drawing.Point(0, 0);
+            this.gameplayView.MultiSelect = false;
+            this.gameplayView.Name = "gameplayView";
+            this.gameplayView.Size = new System.Drawing.Size(786, 363);
+            this.gameplayView.TabIndex = 3;
+            this.gameplayView.UseCompatibleStateImageBehavior = false;
+            this.gameplayView.View = System.Windows.Forms.View.Details;
+            this.gameplayView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gameplayView_MouseDoubleClick);
+            this.gameplayView.Resize += new System.EventHandler(this.gameplayView_Resize);
+            // 
+            // gid
+            // 
+            this.gid.Text = "ID";
+            this.gid.Width = 30;
+            // 
+            // gtext
+            // 
+            this.gtext.Text = "Text";
+            this.gtext.Width = 752;
+            // 
+            // gameplayEditTab
+            // 
+            this.gameplayEditTab.Controls.Add(this.gameplayEditText);
+            this.gameplayEditTab.Controls.Add(this.geditButton);
+            this.gameplayEditTab.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.gameplayEditTab.Location = new System.Drawing.Point(3, 366);
+            this.gameplayEditTab.Name = "gameplayEditTab";
+            this.gameplayEditTab.Size = new System.Drawing.Size(786, 30);
+            this.gameplayEditTab.TabIndex = 4;
+            // 
+            // gameplayEditText
+            // 
+            this.gameplayEditText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.gameplayEditText.Location = new System.Drawing.Point(5, 6);
+            this.gameplayEditText.Name = "gameplayEditText";
+            this.gameplayEditText.Size = new System.Drawing.Size(695, 20);
+            this.gameplayEditText.TabIndex = 3;
+            // 
+            // geditButton
+            // 
+            this.geditButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.geditButton.Location = new System.Drawing.Point(706, 6);
+            this.geditButton.Name = "geditButton";
+            this.geditButton.Size = new System.Drawing.Size(75, 20);
+            this.geditButton.TabIndex = 0;
+            this.geditButton.Text = "Edit";
+            this.geditButton.UseVisualStyleBackColor = true;
+            this.geditButton.Click += new System.EventHandler(this.geditButton_Click);
+            // 
+            // debugPage
+            // 
+            this.debugPage.Controls.Add(this.debuggingText);
+            this.debugPage.Location = new System.Drawing.Point(4, 22);
+            this.debugPage.Name = "debugPage";
+            this.debugPage.Size = new System.Drawing.Size(792, 399);
+            this.debugPage.TabIndex = 2;
+            this.debugPage.Text = "Debug";
+            this.debugPage.UseVisualStyleBackColor = true;
+            // 
+            // debuggingText
+            // 
+            this.debuggingText.BackColor = System.Drawing.SystemColors.Window;
+            this.debuggingText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.debuggingText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.debuggingText.Location = new System.Drawing.Point(0, 0);
+            this.debuggingText.Multiline = true;
+            this.debuggingText.Name = "debuggingText";
+            this.debuggingText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.debuggingText.Size = new System.Drawing.Size(792, 399);
+            this.debuggingText.TabIndex = 2;
             // 
             // saveOLM
             // 
-            this.saveOLM.Filter = "OLM File|*.olm|All files|*.*";
+            this.saveOLM.Filter = "OLM file|*.olm|All files|*.*";
             // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.editBox);
-            this.Controls.Add(this.toolStrip);
+            this.Controls.Add(this.tabEdit);
+            this.Controls.Add(this.toolBar);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Editor";
-            this.Text = "Untitled - PTR2SDE Editor";
-            this.toolStrip.ResumeLayout(false);
-            this.toolStrip.PerformLayout();
+            this.Text = "DBG00.OLM - PTR2SDE";
+            this.toolBar.ResumeLayout(false);
+            this.toolBar.PerformLayout();
+            this.tabEdit.ResumeLayout(false);
+            this.cutscenePage.ResumeLayout(false);
+            this.cutscenePanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.gameplayPage.ResumeLayout(false);
+            this.gameplayPanel.ResumeLayout(false);
+            this.gameplayEditTab.ResumeLayout(false);
+            this.gameplayEditTab.PerformLayout();
+            this.debugPage.ResumeLayout(false);
+            this.debugPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,27 +457,43 @@ namespace yh9uoip
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.TextBox editBox;
-        private System.Windows.Forms.OpenFileDialog loadRawLines;
-        private System.Windows.Forms.SaveFileDialog saveRawLines;
-        private System.Windows.Forms.SaveFileDialog saveOLM;
+        private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.ToolStripDropDownButton fileMenu;
-        private System.Windows.Forms.ToolStripMenuItem saveAction;
-        private System.Windows.Forms.ToolStripMenuItem saveAsAction;
+        private System.Windows.Forms.ToolStripMenuItem save;
+        private System.Windows.Forms.ToolStripMenuItem saveAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem saveRawLinesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadRawLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportSub;
+        private System.Windows.Forms.ToolStripMenuItem importSub;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem exit;
-        private System.Windows.Forms.ToolStripDropDownButton toolsMenu;
-        private System.Windows.Forms.ToolStripDropDownButton viewMenu;
-        private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zoomIn;
-        private System.Windows.Forms.ToolStripMenuItem zoomOut;
-        private System.Windows.Forms.ToolStripDropDownButton aboutMenu;
-        private System.Windows.Forms.ToolStripMenuItem aboutButton;
-        private System.Windows.Forms.ToolStripMenuItem noToolsYetToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wordWrap;
+        private System.Windows.Forms.ToolStripMenuItem exitBut;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem noToolsSign;
+        private System.Windows.Forms.ToolStripDropDownButton helpMenu;
+        private System.Windows.Forms.ToolStripMenuItem aboutBut;
+        private System.Windows.Forms.TabControl tabEdit;
+        private System.Windows.Forms.TabPage cutscenePage;
+        private System.Windows.Forms.TabPage gameplayPage;
+        private System.Windows.Forms.TabPage debugPage;
+        private System.Windows.Forms.TextBox debuggingText;
+        private System.Windows.Forms.ListView cutsceneView;
+        private System.Windows.Forms.ColumnHeader id;
+        private System.Windows.Forms.ColumnHeader cid;
+        private System.Windows.Forms.ColumnHeader timeStart;
+        private System.Windows.Forms.ColumnHeader timeEnd;
+        private System.Windows.Forms.ColumnHeader text;
+        private System.Windows.Forms.ListView gameplayView;
+        private System.Windows.Forms.ColumnHeader gid;
+        private System.Windows.Forms.ColumnHeader gtext;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox cutsceneEditText;
+        private System.Windows.Forms.TextBox ctimingEndText;
+        private System.Windows.Forms.TextBox ctimingStartText;
+        private System.Windows.Forms.Button editBut;
+        private System.Windows.Forms.Panel gameplayEditTab;
+        private System.Windows.Forms.TextBox gameplayEditText;
+        private System.Windows.Forms.Button geditButton;
+        private System.Windows.Forms.Panel cutscenePanel;
+        private System.Windows.Forms.Panel gameplayPanel;
+        private System.Windows.Forms.SaveFileDialog saveOLM;
     }
 }
