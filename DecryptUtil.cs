@@ -436,16 +436,14 @@ namespace yh9uoip
 
         private void UpdateCutsceneData(ref string tmpFile)
         {
-            bool dataEnded = false;
             int statusPos = -1;
             int lastTimeId = -1;
-            int cutOff = 8;
 
-            while (dataEnded == false)
+            while (true)
             {
                 statusPos++;
 
-                if (statusPos > subtitleList.Count - 1) { dataEnded = true; break; }
+                if (statusPos > subtitleList.Count - 1) { break; }
 
                 Subtitle tmpSub = subtitleList[statusPos];
                 byte[] subBytes = ConvIntToPos(tmpSub.SubtitlePosition);
@@ -465,16 +463,13 @@ namespace yh9uoip
                     string madeTiming = Encoding.Default.GetString(time1) + "\x00\x00" + Encoding.Default.GetString(time2) + "\x00\x00";
 
                     /* Patch timing into file*/
-                    tmpFile = tmpFile.Remove(tmpTime.TimingPosition, cutOff);
+                    tmpFile = tmpFile.Remove(tmpTime.TimingPosition, 8);
                     tmpFile = tmpFile.Insert(tmpTime.TimingPosition, madeTiming);
-
-                    /* Sanity Check */
-                    if (tmpFile[tmpTime.TimingPosition + 7] != '\x00') Console.WriteLine("Warning - timing sanity check fail, fix cutOff");
                 }
 
                 /* Subtitle Data */
 
-                if (statusPos + 1 < subtitleList.Count - 1 && subtitleList[statusPos + 1].IsSecondData)
+                if (statusPos + 1 < subtitleList.Count - 1 && !subtitleList[statusPos].IsSecondData && subtitleList[statusPos + 1].IsSecondData)
                 {
                     Subtitle tmpSub2 = subtitleList[statusPos + 1];
                     byte[] subBytes2 = ConvIntToPos(tmpSub2.SubtitlePosition);
@@ -484,21 +479,16 @@ namespace yh9uoip
                     madeLine += subPos2 + "\x01";
 
                     /* Patch subtitle into file */
-                    tmpFile = tmpFile.Remove(tmpSub.DataPosition, cutOff);
+                    tmpFile = tmpFile.Remove(tmpSub.DataPosition, 8);
                     tmpFile = tmpFile.Insert(tmpSub.DataPosition, madeLine);
                     statusPos++;
-
-                    /* Sanity Check */
-                    if (madeLine.Length > 8) Console.WriteLine("Warning - OLM cutscene length fail, output " + madeLine + " length " + madeLine.Length);
-                    if (tmpFile[tmpSub.DataPosition + 7] != '\x01') Console.WriteLine("Warning - subtitle sanity check fail, fix cutOff");
                 }
-                else if (tmpSub.IsSecondData)
+                else
                 {
-                    string otherStr = tmpFile[tmpSub.DataPosition - 4].ToString() + tmpFile[tmpSub.DataPosition - 3].ToString() + tmpFile[tmpSub.DataPosition - 2].ToString() + tmpFile[tmpSub.DataPosition - 1].ToString();
-                    madeLine += otherStr + subPos + "\x01";
+                    madeLine += subPos + "\x01";
 
-                    tmpFile = tmpFile.Remove(tmpSub.DataPosition - 4, cutOff);
-                    tmpFile = tmpFile.Insert(tmpSub.DataPosition - 4, madeLine);
+                    tmpFile = tmpFile.Remove(tmpSub.DataPosition, madeLine.Length);
+                    tmpFile = tmpFile.Insert(tmpSub.DataPosition, madeLine);
                 }
             }
         }
@@ -506,13 +496,12 @@ namespace yh9uoip
         private void UpdateGameplayData(ref string tmpFile)
         {
             int statusPos = -1;
-            bool isDataEnded = false;
 
-            while (isDataEnded == false)
+            while (true)
             {
                 statusPos++;
 
-                if (statusPos > gameplaySubtitleList.Count - 1) { isDataEnded = true; break; }
+                if (statusPos > gameplaySubtitleList.Count - 1) { break; }
 
                 GSubtitle tmpSub = gameplaySubtitleList[statusPos];
                 byte[] subBytes = ConvIntToPos(tmpSub.SubtitlePosition);
@@ -572,10 +561,26 @@ namespace yh9uoip
         public int SubtitleId { get; set; }
         public bool IsSecondData { get; set; }
         public bool IsHidden { get; set; }
+        public bool IsUneditable { get; set; }
 
         public Subtitle(string subText, int subDataPos, int subPos, int timeDataId, int subtitleId, bool isSecondData, bool isHidden)
         {
             (SubtitleText, DataPosition, SubtitlePosition, TimingId, SubtitleId, IsSecondData, IsHidden) = (subText, subDataPos, subPos, timeDataId, subtitleId, isSecondData, isHidden);
+        }
+    }
+
+    public class GSubtitle
+    {
+        public string SubtitleText { get; set; }
+        public int DataPosition { get; set; }
+        public int SubtitlePosition { get; set; }
+        public int SubtitleId { get; set; }
+        public bool IsHidden { get; set; }
+        public bool IsUneditable { get; set; }
+
+        public GSubtitle(string subText, int subDataPos, int subPos, int subtitleId)
+        {
+            (SubtitleText, DataPosition, SubtitlePosition, SubtitleId) = (subText, subDataPos, subPos, subtitleId);
         }
     }
 
@@ -589,20 +594,6 @@ namespace yh9uoip
         public Timing(int timingPos, int subtitleId, int timingStart, int timingEnd)
         {
             (TimingPosition, SubtitleId, TimingAppear, TimingDisappear) = (timingPos, subtitleId, timingStart, timingEnd);
-        }
-    }
-
-    public class GSubtitle
-    {
-        public string SubtitleText { get; set; }
-        public int DataPosition { get; set; }
-        public int SubtitlePosition { get; set; }
-        public int SubtitleId { get; set; }
-        public bool IsHidden { get; set; }
-
-        public GSubtitle(string subText, int subDataPos, int subPos, int subtitleId)
-        {
-            (SubtitleText, DataPosition, SubtitlePosition, SubtitleId) = (subText, subDataPos, subPos, subtitleId);
         }
     }
 

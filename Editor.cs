@@ -50,9 +50,9 @@ namespace yh9uoip
             int lastTmgId = -1;
             foreach (Subtitle curSub in decryptUtil.subtitleList)
             {
+                a++;
                 if (!curSub.IsHidden)
                 {
-                    a++;
                     ListViewItem tmpItem = cutsceneView.Items.Add(a.ToString());
                     tmpItem.SubItems.Add(curSub.SubtitleId.ToString());
 
