@@ -21,6 +21,7 @@ namespace yh9uoip
 
         public string loadedFileLoc;
 
+        public int subtitlesDataStart;
         public int datalistAmmount;
         private bool dataEnded;
         private int tmpLastTimeData;
@@ -28,22 +29,28 @@ namespace yh9uoip
         public string[] japaneseIndentifier = { "¤", "¦", "¥", "·", "÷", "©", "Æ" };
         public static string checkHead1 = "\x00\x00\xBA\x42\x00\x00\x00\x00";
         public static string checkHead2 = "\x00\x00\xC8\x42\x00\x00\x00\x00";
+        private readonly string gmHead = "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF";
         public static string battleModeHead1 = "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00";
         public static string battleModeHead2 = "\x42";
         public static string stageBonusHead = "\x00\x00\x00\x00\x33\x33\xD9\x42";
+        public static string dataEndHeader = "\x00\x01\x00\x01\x00\x00\x00\x00";
+        public static string dataEndHeader2 = "\x00\x19\x19\x00\x00\x00\x00\x00";
         public static string gdataStartHeader = "\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\xFF\xFF\xFF\xFF";
         public static string gdataEndHeader = "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF";
-        public static string dataEndHeader = "\x01\x00\x00\x00"; /* TODO: See if this is correct */
-        public static string dataEndHeader2 = "\x00\x19\x19\x00\x00\x00\x00\x00";
+        Stopwatch testtime2 = new Stopwatch();
 
         /* Main */
 
         public void startLoad()
         {
+            testtime2.Restart();
+            testtime2.Stop();
+
             /* Pull initial data from Editor */
             loadedFileS = Editor.loadedFileS;
             loadedFileB = Editor.loadedFileB;
             loadedFileLoc = Editor.loadedFileLoc;
+            subtitlesDataStart = loadedFileS.LastIndexOf("\x01");
 
             /* Find & Load */
             Stopwatch timing = new Stopwatch();
@@ -74,7 +81,7 @@ namespace yh9uoip
             int tmpPos;
 
             /* General ??42000000 subtitles */
-            List<int> headerOcurrances = loadedFileS.Substring(0, loadedFileS.LastIndexOf('\x01')).AllIndexesOf(headerB);
+            List<int> headerOcurrances = loadedFileS.Substring(0, subtitlesDataStart).AllIndexesOf(headerB);
             headerOcurrances.Reverse();
             foreach (int tmpPosHeader in headerOcurrances)
             {
@@ -95,7 +102,7 @@ namespace yh9uoip
             }
 
             /* Battle Mode subtitles */
-            List<int> aheaderOcurrances = loadedFileS.Substring(0, loadedFileS.LastIndexOf('\x01')).AllIndexesOf(battleModeHead2);
+            List<int> aheaderOcurrances = loadedFileS.Substring(0, subtitlesDataStart).AllIndexesOf(battleModeHead2);
             aheaderOcurrances.Reverse();
             foreach (int tmpPosHeaderB in aheaderOcurrances)
             {
@@ -129,8 +136,6 @@ namespace yh9uoip
             return false;
         }
 
-        private string gmHead = "\x00\x00\x00\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF";
-
         private void LoadSubtitlesFromFile()
         {
             Stopwatch timing = new Stopwatch();
@@ -149,7 +154,7 @@ namespace yh9uoip
 
                 while (dataEnded is false)
                 {
-                    if (curPos > loadedFileS.LastIndexOf('\x01')) dataEnded = true;
+                    if (curPos > subtitlesDataStart) dataEnded = true; // REMOVE IF OK : loadedFileS.LastIndexOf('\x01')
 
                     string currentLine;
                     currentLine = loadedFileS.Substring(curPos, 8);
@@ -171,7 +176,7 @@ namespace yh9uoip
             /* Load In-gameplay subtitles */
 
             int curGPPos = loadedFileS.IndexOf(gdataStartHeader) + gdataStartHeader.Length;
-            int curGEndPos = loadedFileS.Substring(curGPPos).LastIndexOf(gdataEndHeader);
+            int curGEndPos = loadedFileS.Substring(curGPPos).LastIndexOf(gdataEndHeader) + 20;
             List<int> gdataPosIndexes = loadedFileS.AllIndexesOf(gmHead);
 
             /* Remove wrong indexes */
@@ -179,13 +184,14 @@ namespace yh9uoip
 
             int tmpRealPos;
             int tmpStringPos;
-            string tmpCutStringPos;
+            string tmpCutSubPosString;
             string tmpCutString;
             bool tmpDontAdd;
+            bool tmpHide;
 
             void readGameplayData(int subId)
             {
-                tmpCutStringPos = loadedFileS.Substring(tmpRealPos, 3);
+                tmpCutSubPosString = loadedFileS.Substring(tmpRealPos, 3);
 
                 byte ch0 = loadedFileB[tmpRealPos];
                 byte ch1 = loadedFileB[tmpRealPos + 1];
@@ -195,11 +201,13 @@ namespace yh9uoip
 
                 /* Checks to mitigate false positions */
                 tmpDontAdd = false;
-                if (tmpCutStringPos.StartsWith("\x00\x00") ||
-                    tmpCutStringPos.StartsWith("\xFF\xFF\xFF") ||
-                    tmpCutString.Length < 1) tmpDontAdd = true;
+                tmpHide = false;
+                if (tmpStringPos < subtitlesDataStart) tmpDontAdd = true;
+                if (tmpCutSubPosString.StartsWith("\x00\x00") ||
+                    tmpCutSubPosString.StartsWith("\xFF\xFF\xFF") ||
+                    tmpCutString.Length < 1) tmpHide = true;
 
-                if (!tmpDontAdd) { gameplaySubtitleList.Add(new GSubtitle(tmpCutString, tmpRealPos, tmpStringPos, subId)); }
+                if (!tmpDontAdd) { gameplaySubtitleList.Add(new GSubtitle(tmpCutString, tmpRealPos, tmpStringPos, subId, tmpHide)); }
             }
 
             foreach (int pDataPos in gdataPosIndexes)
@@ -270,7 +278,7 @@ namespace yh9uoip
                 int subtitlePosition = ConvPosToInt(loadedFileB[dataPosition], loadedFileB[dataPosition + 1], loadedFileB[dataPosition + 2]);
 
                 /* Checks to hide invalid strings */
-                bool isHidden = subtitleText.Length < 1 || subtitlePosition < loadedFileS.LastIndexOf('\x01');
+                bool isHidden = subtitleText.Length < 1 || subtitlePosition < subtitlesDataStart;
 
                 subtitleList.Add(new Subtitle(subtitleText, dataPosition, subtitlePosition, tmpLastTimeData, subId, false, isHidden));
             }
@@ -282,7 +290,7 @@ namespace yh9uoip
                 int subtitlePosition = ConvPosToInt(loadedFileB[dataPosition + 4], loadedFileB[dataPosition + 5], loadedFileB[dataPosition + 6]);
 
                 /* Checks to hide invalid strings */
-                bool isHidden = subtitleText.Length < 1 || subtitlePosition < loadedFileS.LastIndexOf('\x01');
+                bool isHidden = subtitleText.Length < 1 || subtitlePosition < subtitlesDataStart;
 
                 subtitleList.Add(new Subtitle(subtitleText, dataPosition + 4, subtitlePosition, tmpLastTimeData, subId, true, isHidden));
             }
@@ -372,8 +380,9 @@ namespace yh9uoip
             Console.WriteLine("Applying fixed positions to gameplay data...");
             UpdateGameplayData(ref fileToSave);
 
-            Console.WriteLine("Took " + stiming.Elapsed + " to edit the file");
             stiming.Stop();
+            Console.WriteLine("Took " + stiming.Elapsed + " to edit the file");
+            Console.WriteLine("Took " + testtime2.Elapsed + " to write fixed positions");
 
             Console.WriteLine("Saving modified file...");
             File.WriteAllText(saveFileLocation, fileToSave, Encoding.Default);
@@ -430,8 +439,7 @@ namespace yh9uoip
             }
 
             int nextzero = tmpFile.Substring(subPos).IndexOf("\x00");
-            tmpFile = tmpFile.Remove(subPos, nextzero);
-            tmpFile = tmpFile.Insert(subPos, tmpString);
+            tmpFile = tmpFile.Remove(subPos, nextzero).Insert(subPos, tmpString);
         }
 
         private void UpdateCutsceneData(ref string tmpFile)
@@ -463,8 +471,9 @@ namespace yh9uoip
                     string madeTiming = Encoding.Default.GetString(time1) + "\x00\x00" + Encoding.Default.GetString(time2) + "\x00\x00";
 
                     /* Patch timing into file*/
-                    tmpFile = tmpFile.Remove(tmpTime.TimingPosition, 8);
-                    tmpFile = tmpFile.Insert(tmpTime.TimingPosition, madeTiming);
+                    testtime2.Start();
+                    tmpFile = tmpFile.Patch(madeTiming, tmpTime.TimingPosition);
+                    testtime2.Stop();
                 }
 
                 /* Subtitle Data */
@@ -479,16 +488,18 @@ namespace yh9uoip
                     madeLine += subPos2 + "\x01";
 
                     /* Patch subtitle into file */
-                    tmpFile = tmpFile.Remove(tmpSub.DataPosition, 8);
-                    tmpFile = tmpFile.Insert(tmpSub.DataPosition, madeLine);
+                    testtime2.Start();
+                    tmpFile = tmpFile.Patch(madeLine, tmpSub.DataPosition);
+                    testtime2.Stop();
                     statusPos++;
                 }
                 else
                 {
                     madeLine += subPos + "\x01";
 
-                    tmpFile = tmpFile.Remove(tmpSub.DataPosition, madeLine.Length);
-                    tmpFile = tmpFile.Insert(tmpSub.DataPosition, madeLine);
+                    testtime2.Start();
+                    tmpFile = tmpFile.Patch(madeLine, tmpSub.DataPosition);
+                    testtime2.Stop();
                 }
             }
         }
@@ -544,9 +555,17 @@ namespace yh9uoip
                     statusPos++;
                 }
 
-                tmpFile = tmpFile.Remove(tmpSub.DataPosition, madeLine.Length);
-                tmpFile = tmpFile.Insert(tmpSub.DataPosition, madeLine);
+                testtime2.Start();
+                tmpFile = tmpFile.Patch(madeLine, tmpSub.DataPosition);
+                testtime2.Stop();
             }
+        }
+
+        /* Tools */
+
+        public void SplitSubtitle(int subMod, bool isGameplay)
+        {
+
         }
     }
 
@@ -578,9 +597,9 @@ namespace yh9uoip
         public bool IsHidden { get; set; }
         public bool IsUneditable { get; set; }
 
-        public GSubtitle(string subText, int subDataPos, int subPos, int subtitleId)
+        public GSubtitle(string subText, int subDataPos, int subPos, int subtitleId, bool isHidden)
         {
-            (SubtitleText, DataPosition, SubtitlePosition, SubtitleId) = (subText, subDataPos, subPos, subtitleId);
+            (SubtitleText, DataPosition, SubtitlePosition, SubtitleId, IsHidden) = (subText, subDataPos, subPos, subtitleId, isHidden);
         }
     }
 
@@ -648,6 +667,16 @@ namespace yh9uoip
                     return indexes;
                 indexes.Add(index);
             }
+        }
+
+        public static string Patch(this string str, string topatch, int position)
+        {
+            StringBuilder abc = new StringBuilder(str);
+            for (int a = 0; a < topatch.Length; a++)
+            {
+                abc[position + a] = topatch[a];
+            }
+            return abc.ToString();
         }
     }
 }

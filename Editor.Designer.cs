@@ -40,7 +40,6 @@ namespace yh9uoip
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitBut = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.noToolsSign = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripDropDownButton();
             this.aboutBut = new System.Windows.Forms.ToolStripMenuItem();
             this.tabEdit = new System.Windows.Forms.TabControl();
@@ -68,6 +67,7 @@ namespace yh9uoip
             this.debugPage = new System.Windows.Forms.TabPage();
             this.debuggingText = new System.Windows.Forms.TextBox();
             this.saveOLM = new System.Windows.Forms.SaveFileDialog();
+            this.splitSubtitleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolBar.SuspendLayout();
             this.tabEdit.SuspendLayout();
             this.cutscenePage.SuspendLayout();
@@ -161,20 +161,13 @@ namespace yh9uoip
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.noToolsSign});
+            this.splitSubtitleToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.ShowDropDownArrow = false;
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(38, 22);
             this.toolStripDropDownButton2.Text = "Tools";
-            // 
-            // noToolsSign
-            // 
-            this.noToolsSign.Enabled = false;
-            this.noToolsSign.Name = "noToolsSign";
-            this.noToolsSign.Size = new System.Drawing.Size(148, 22);
-            this.noToolsSign.Text = "No tools yet :(";
             // 
             // helpMenu
             // 
@@ -425,6 +418,12 @@ namespace yh9uoip
             // 
             this.saveOLM.Filter = "OLM file|*.olm|All files|*.*";
             // 
+            // splitSubtitleToolStripMenuItem
+            // 
+            this.splitSubtitleToolStripMenuItem.Name = "splitSubtitleToolStripMenuItem";
+            this.splitSubtitleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.splitSubtitleToolStripMenuItem.Text = "Split subtitle";
+            // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,7 +466,6 @@ namespace yh9uoip
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitBut;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
-        private System.Windows.Forms.ToolStripMenuItem noToolsSign;
         private System.Windows.Forms.ToolStripDropDownButton helpMenu;
         private System.Windows.Forms.ToolStripMenuItem aboutBut;
         private System.Windows.Forms.TabControl tabEdit;
@@ -495,5 +493,6 @@ namespace yh9uoip
         private System.Windows.Forms.Panel cutscenePanel;
         private System.Windows.Forms.Panel gameplayPanel;
         private System.Windows.Forms.SaveFileDialog saveOLM;
+        private System.Windows.Forms.ToolStripMenuItem splitSubtitleToolStripMenuItem;
     }
 }

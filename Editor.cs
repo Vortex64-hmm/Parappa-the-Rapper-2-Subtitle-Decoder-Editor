@@ -77,8 +77,11 @@ namespace yh9uoip
             foreach (GSubtitle curSub in decryptUtil.gameplaySubtitleList)
             {
                 b++;
-                ListViewItem tmpItem = gameplayView.Items.Add(b.ToString());
-                tmpItem.SubItems.Add(curSub.SubtitleText);
+                if (!curSub.IsHidden)
+                {
+                    ListViewItem tmpItem = gameplayView.Items.Add(b.ToString());
+                    tmpItem.SubItems.Add(curSub.SubtitleText);
+                }
             }
         }
 
@@ -178,6 +181,8 @@ namespace yh9uoip
 
             decryptUtil.fixList.Add(new ModPoint(tmpPos, tmpDiff, cCurItem - 1, false));
             decryptUtil.FixStrings(tmpPos, tmpDiff);
+
+            Console.WriteLine("Correction added. Subtitle position: " + tmpPos + ", diff: " + tmpDiff);
 
             ListViewItem tmp = cutsceneView.FindItemWithText(cCurItem.ToString());
             tmp.SubItems[2].Text = ctimingStartText.Text;
